@@ -5,14 +5,15 @@ import './monsters.css'
 const Monsters = ({monsters}) => {
     
     const [divState, setdivState] = useState(false)
-    const [specific_div, setspecific_div] = useState('')
+    const [specific_div, setspecific_div] = useState([])
     function changeView(monster){
 	if(divState === true){
 	    setdivState(false)
-	    setspecific_div(monster)
+	    setspecific_div('')
 	}
-	else{
+	else if(divState === false){
 	    setdivState(true)
+	    setspecific_div(monster)
 	}
     }
     return (

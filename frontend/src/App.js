@@ -1,24 +1,13 @@
 import React, {Component} from 'react';
 import Monsters from './components/monsters';
+import PostFormMonster from './components/post_monster';
 
 class App extends Component {
-  
-   constructor() {
-	super()
-	this.state={
-		showMe:true,
-		monsters: []
-	}
-	
-   }
-   operation()
-   {
-	   alert("This works!")
-   }
    render() {
         return (
 	<div class="all_monsters">
             <Monsters monsters={this.state.monsters} />
+	    <PostFormMonster />
 	</div>
         )
     }
