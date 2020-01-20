@@ -1,0 +1,13 @@
+<img src="/media/d20.png" alt="">
+<h2> DND-HELPER </h2>
+<br>
+<h> Here is the list of all creatures </h>
+{% if all_monsters_list %}
+    <ul>
+    {% for monster in all_monsters_list %}
+        <li><a href="/creatures/{{ monster.name }}">{{ monster.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No monsters are available.</p>
+{% endif %}
