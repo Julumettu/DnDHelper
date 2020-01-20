@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './monsters.css'
 
 
 const Monsters = ({monsters}) => {
+    
+    const [divState, setdivState] = useState("visible")
+    function changeView(){
+	if(divState === "visible"){
+	    setdivState("hidden")
+	}
+	else{
+	    setdivState("visible")
+	}
+    }
     return (
         <div class="monsters_main_div">
             <center><h1>Monster List</h1></center>
@@ -12,9 +22,9 @@ const Monsters = ({monsters}) => {
 		<td>Name: { monster.name } <br></br> { monster.size } / { monster.allignment }</td>
 		</tr>
 		<button onClick={() => 
-			alert("Tähän se jäi")
+			changeView()
 		}>Show more/less</button>
-		<table class="more_info" style={{visibility: "visible"}}>
+		<table class="more_info" style={{visibility: divState}}>
 		<tr>
 		<td>AC: { monster.armor_class }
 		<br></br>HP: { monster.hit_points } / { monster.hit_points_dice }
