@@ -5,9 +5,11 @@ import './monsters.css'
 const Monsters = ({monsters}) => {
     
     const [divState, setdivState] = useState(false)
-    function changeView(){
+    const [specific_div, setspecific_div] = useState('')
+    function changeView(monster){
 	if(divState === true){
 	    setdivState(false)
+	    setspecific_div(monster)
 	}
 	else{
 	    setdivState(true)
@@ -22,9 +24,9 @@ const Monsters = ({monsters}) => {
 		<td>Name: { monster.name } <br></br> { monster.size } / { monster.allignment }</td>
 		</tr>
 		<button onClick={() => 
-			changeView()
+			changeView(monster.name)
 		}>Show more/less</button>
-		{ divState &&         <table class="more_info" style={{visibility: divState}}>
+		{ divState &&  monster.name === specific_div && <table class="more_info" style={{visibility: divState}}>
         <tr>
         <td>AC: { monster.armor_class }
         <br></br>HP: { monster.hit_points } / { monster.hit_points_dice }
