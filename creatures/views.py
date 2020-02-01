@@ -5,7 +5,8 @@ from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-
+from rest_framework import filters
+from rest_framework import generics
 from rest_framework.views import APIView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .serializers import *
@@ -38,11 +39,11 @@ def handler404(request, exception, template_name="404.html"):
     response.status_code = 404
     return response
 
-class monsterList(APIView):
-    def get(self,request):
-        monsters = Monster.objects.all()
-        serializer=MonsterSerializer(monsters, many=True)
-        return Response(serializer.data)
+class monsterList(generics.ListCreateAPIView):
+    queryset = Monster.objects.all()
+    serializer_class = MonsterSerializer
+    search_fields = ['name']
+    filter_backends = (filters.SearchFilter,)
     def post(self,request):
         serializer = MonsterSerializer(data=request.data)
         if serializer.is_valid():
